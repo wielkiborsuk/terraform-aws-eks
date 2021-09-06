@@ -42,6 +42,9 @@ The role ARN specified in `var.default_iam_role_arn` will be used by default. In
 | min\_capacity | Min number of workers | number | `var.workers_group_defaults[asg_min_size]` |
 | update_config.max\_unavailable\_percentage | Max percentage of unavailable nodes during update. (e.g. 25, 50, etc) | number | `null` if `update_config.max_unavailable` is set |
 | update_config.max\_unavailable | Max number of unavailable nodes during update  | number | `null` if `update_config.max_unavailable_percentage` is set |
+| metadata_http_endpoint | Whether the metadata service is available. Can be `enabled` or `disabled`. Require `create_launch_template` to be `true`. | string | `enabled` |
+| metadata_http_tokens | Whether or not the metadata service requires session tokens, also referred to as Instance Metadata Service Version 2 (IMDSv2). Can be `optional` or `required`. Require `create_launch_template` to be `true`. | string | `optional` |
+| metadata_http_put_response_hop_limit | The desired HTTP PUT response hop limit for instance metadata requests. The larger the number, the further instance metadata requests can travel. Can be an integer from `1` to `64`. Require `create_launch_template` to be `true`. | string | `null` |
 | name | Name of the node group. If you don't really need this, we recommend you to use `name_prefix` instead. | string | Will use the autogenerate name prefix |
 | name_prefix | Name prefix of the node group | string | Auto generated |
 | pre_userdata | userdata to pre-append to the default userdata. Require `create_launch_template` to be `true`| string | "" |

@@ -43,6 +43,12 @@ resource "aws_launch_template" "workers" {
 
   ebs_optimized = lookup(each.value, "ebs_optimized", !contains(var.ebs_optimized_not_supported, element(each.value.instance_types, 0)))
 
+  metadata_options {
+    http_endpoint               = lookup(each.value, "metadata_http_endpoint", null)
+    http_tokens                 = lookup(each.value, "metadata_http_tokens", null)
+    http_put_response_hop_limit = lookup(each.value, "metadata_http_put_response_hop_limit", null)
+  }
+
   instance_type = each.value["set_instance_types_on_lt"] ? element(each.value.instance_types, 0) : null
 
   monitoring {
